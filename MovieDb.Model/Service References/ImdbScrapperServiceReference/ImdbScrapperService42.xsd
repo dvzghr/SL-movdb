@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/MovieDbWebApp/Services/ImdbScrapperService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ImdbMovie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Awards" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="Cast" nillable="true" type="tns:ArrayOfActor" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Directors" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Genres" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImdbUrl" nillable="true" type="xs:string" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MediaImages" nillable="true" type="q3:ArrayOfstring" />
+      <xs:element minOccurs="0" name="MpaaRating" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nominations" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="OriginalTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Oscars" type="xs:unsignedByte" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="OscarsArray" nillable="true" type="q4:ArrayOfanyType" />
+      <xs:element minOccurs="0" name="Plot" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Poster" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PosterFull" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PosterLarge" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PosterSmall" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Rating" type="xs:double" />
+      <xs:element minOccurs="0" name="ReleaseDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Runtime" type="xs:short" />
+      <xs:element minOccurs="0" name="Storyline" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tagline" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Top250" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="Votes" type="xs:unsignedInt" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Writers" nillable="true" type="q5:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Year" type="xs:short" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImdbMovie" nillable="true" type="tns:ImdbMovie" />
+  <xs:complexType name="ArrayOfActor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Actor" nillable="true" type="tns:Actor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfActor" nillable="true" type="tns:ArrayOfActor" />
+  <xs:complexType name="Actor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Actor" nillable="true" type="tns:Actor" />
+  <xs:complexType name="Star">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Actor">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Star" nillable="true" type="tns:Star" />
+</xs:schema>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="131ea905-6cc8-42f7-859b-8f5fc624dd12" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="DataContracts" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/MovieDbWebApp/Services/ImdbScrapperService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ImdbScrapperService1.disco" MetadataType="Disco" ID="99982750-e7a2-4db7-ba28-27a3a9ac1d80" SourceId="1" SourceUrl="http://localhost/MovieDbWebApp/Services/ImdbScrapperService.svc?disco" />
+    <MetadataFile FileName="ImdbScrapperService4.xsd" MetadataType="Schema" ID="6efbaf52-745b-4cea-bb36-ca9236e4325d" SourceId="1" SourceUrl="http://localhost/MovieDbWebApp/Services/ImdbScrapperService.svc?xsd=xsd3" />
+    <MetadataFile FileName="Service11.wsdl" MetadataType="Wsdl" ID="05c85dd0-292c-4528-bb26-f18f1669fea6" SourceId="1" SourceUrl="http://localhost/MovieDbWebApp/Services/ImdbScrapperService.svc?wsdl" />
+    <MetadataFile FileName="ImdbScrapperService41.xsd" MetadataType="Schema" ID="193b4425-4d65-4650-9272-5c3b22329014" SourceId="1" SourceUrl="http://localhost/MovieDbWebApp/Services/ImdbScrapperService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ImdbScrapperService42.xsd" MetadataType="Schema" ID="f5fa7d32-4962-4186-8d1f-3e8ff16f16e1" SourceId="1" SourceUrl="http://localhost/MovieDbWebApp/Services/ImdbScrapperService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ImdbScrapperService43.xsd" MetadataType="Schema" ID="b423ae16-db4a-4be3-98c3-1a3e0c9e8f34" SourceId="1" SourceUrl="http://localhost/MovieDbWebApp/Services/ImdbScrapperService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

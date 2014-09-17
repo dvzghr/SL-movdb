@@ -1,0 +1,241 @@
+﻿<navigation:Page x:Class="MovieDb.Views.MoviePage"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+                 xmlns:hc="clr-namespace:MovieDb.HelperClasses"
+                 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:datacontract="clr-namespace:DataContracts;assembly=DataContracts"
+                 mc:Ignorable="d"
+                 d:DesignWidth="1280"
+                 d:DesignHeight="1500"
+                 Title="Movie Details">
+
+    <navigation:Page.Resources>
+        <hc:HtmlConverter x:Key="HtmlConverter" />
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplateWrapPanel">
+            <telerik:RadWrapPanel AnimationDuration="1000"
+                                  IsAnimated="True" />
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="DataTemplateImage">
+            <StackPanel>
+                <Image Height="200"
+                       Source="{Binding Mode=OneWay}" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="DataTemplateText">
+            <StackPanel>
+                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource HtmlConverter}}"
+                           FontFamily="/MovieDb;component/Fonts/BankGothic Lt BT Light.ttf#BankGothic Lt BT"
+                           FontSize="16"
+                           Margin="5" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="DataTemplateIcons">
+            <Grid>
+                <Image Height="100"
+                       Source="{Binding StringFormat=/img/icon\{0\}.png}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="datacontract:Actor">
+        	<StackPanel>
+        		<TextBlock Text="{Binding FullName, Converter={StaticResource HtmlConverter}, Mode=OneWay}"
+        			FontFamily="/MovieDb;component/Fonts/BankGothic Lt BT Light.ttf#BankGothic Lt BT"
+        			FontSize="16"
+        			Margin="5" />
+        	</StackPanel>
+        </DataTemplate>
+		<DataTemplate DataType="datacontract:Star">
+        	<StackPanel Orientation="Horizontal">
+        		<Image Source="/MovieDb;component/img/star.png" Stretch="Fill" VerticalAlignment="Stretch" Height="25"/>
+        		<TextBlock Text="{Binding FullName, Converter={StaticResource HtmlConverter}, Mode=OneWay}"
+        			FontFamily="/MovieDb;component/Fonts/BankGothic Lt BT Light.ttf#BankGothic Lt BT"
+        			FontSize="16"
+        			Margin="5" />
+        	</StackPanel>
+        </DataTemplate>
+		<DataTemplate x:Key="DataTemplateOscars">
+			<StackPanel>
+				<Image Source="/img/oscar.png" Height="100" />
+			</StackPanel>
+		</DataTemplate>
+    </navigation:Page.Resources>
+
+    <Grid x:Name="LayoutRoot"
+          d:DataContext="{Binding Source={StaticResource Locator}}"
+          Background="White">
+        <Image x:Name="imgPoster"
+               Source="{Binding MViewModel.SelMovie.SingleMovie.PosterFull}"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Stretch="Uniform" Height="{Binding ActualHeight, ElementName=grid}" MinHeight="1000">
+            <Image.OpacityMask>
+                <RadialGradientBrush>
+                    <GradientStop Color="#CC000000"
+                                  Offset="0" />
+                    <GradientStop Color="Transparent"
+                                  Offset="1" />
+                </RadialGradientBrush>
+            </Image.OpacityMask>
+        </Image>
+
+        <Grid x:Name="grid" DataContext="{Binding MViewModel.SelMovie.SingleMovie}" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal" VerticalAlignment="Top">
+                <TextBlock x:Name="txtTitle"
+                           Text="{Binding Title, Converter={StaticResource HtmlConverter}}"
+                           FontSize="48"
+                           VerticalAlignment="Bottom" FontFamily="/MovieDb;component/Fonts/BankGothic Md BT Medium.ttf#BankGothic Md BT" />
+                <TextBlock x:Name="txtYear"
+                           Text="{Binding Year, StringFormat=(\{0\})}"
+                           FontSize="32"
+                           VerticalAlignment="Bottom" Margin="5,5,5,9" />
+            </StackPanel>
+            <TextBlock x:Name="txtId"
+            	Text="{Binding Id}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Column="1" Margin="10,50,5,5" />
+            <telerik:RadRating Value="{Binding Rating}"
+            	VerticalAlignment="Bottom"
+            	Precision="Half"
+            	IsReadOnly="True"
+            	NumberOfItemsToGenerate="10" Grid.Column="1" d:LayoutOverrides="HorizontalAlignment" Grid.Row="1" Margin="5" />
+            <TextBlock Text="{Binding Rating}"
+            	Style="{StaticResource TextBlockBold}"
+            	HorizontalAlignment="Left"
+            	Margin="230,0,0,2"
+            	VerticalAlignment="Bottom" FontSize="21.333" Grid.Column="1" Grid.Row="1" />
+            <TextBlock Text="DIRECTORS"
+                       Grid.Row="2"
+                       Style="{StaticResource TextBlockBold}"
+                       HorizontalAlignment="Right" />
+            <ItemsControl x:Name="icDirectors"
+                          ItemTemplate="{StaticResource DataTemplateText}"
+                          ItemsSource="{Binding Directors}"
+                          Grid.Row="2"
+                          Grid.Column="1" />
+            <TextBlock Text="IMDB"
+                       Style="{StaticResource TextBlockBold}"
+                       Grid.Row="3"
+                       HorizontalAlignment="Right" />
+            <HyperlinkButton x:Name="hypImdbUrl"
+                             NavigateUri="{Binding ImdbUrl}"
+                             Content="{Binding ImdbUrl}"
+                             TargetName="_new"
+                             Grid.Row="3"
+                             Grid.Column="1" />
+            <TextBlock Text="GENRES"
+                       Grid.Row="4"
+                       HorizontalAlignment="Right"
+                       Style="{StaticResource TextBlockBold}" />
+            <ItemsControl x:Name="icGenres"
+                          ItemTemplate="{StaticResource DataTemplateIcons}"
+                          ItemsSource="{Binding Genres}"
+                          Grid.Row="4"
+                          Grid.Column="1"
+                          ItemsPanel="{StaticResource ItemsPanelTemplateWrapPanel}" />
+            <TextBlock HorizontalAlignment="Right"
+                       Text="TAGLINE"
+                       Style="{StaticResource TextBlockBold}"
+                       Grid.Row="5" />
+            <TextBlock x:Name="txtTagline"
+                       Text="{Binding Tagline, Converter={StaticResource HtmlConverter}}"
+                       Grid.Row="5"
+                       Grid.Column="1" />
+            <TextBlock HorizontalAlignment="Right"
+                       Text="PLOT"
+                       Grid.Row="6"
+                       Style="{StaticResource TextBlockBold}" />
+            <TextBlock x:Name="txtPlot"
+                       Text="{Binding Plot, Converter={StaticResource HtmlConverter}}"
+                       Grid.Row="6"
+                       Grid.Column="1" />
+            <TextBlock HorizontalAlignment="Right"
+                       Text="STORYLINE"
+                       Style="{StaticResource TextBlockBold}"
+                       Grid.Row="7" />
+            <TextBlock x:Name="txtStoryline"
+                       Text="{Binding Storyline, Converter={StaticResource HtmlConverter}}"
+                       Grid.Row="7"
+                       Grid.Column="1" />
+            <TextBlock HorizontalAlignment="Right"
+                       Text="Top250"
+                       Style="{StaticResource TextBlockBold}"
+                       Grid.Row="8" />
+            <TextBlock x:Name="txtTop250"
+                       Text="{Binding Top250}"
+                       Grid.Row="8"
+                       Grid.Column="1" />
+			<TextBlock HorizontalAlignment="Right"
+                       Text="AWARDS"
+                       Style="{StaticResource TextBlockBold}"
+                       Grid.Row="9" />
+            <TextBlock x:Name="txtAwards"
+                       Text="{Binding Awards}"
+                       Grid.Row="9"
+                       Grid.Column="1" />
+			<TextBlock HorizontalAlignment="Right"
+                       Text="NOMINATIONS"
+                       Style="{StaticResource TextBlockBold}"
+                       Grid.Row="10" />
+            <TextBlock x:Name="txtNominations"
+                       Text="{Binding Nominations}"
+                       Grid.Row="10"
+                       Grid.Column="1" />
+			<TextBlock HorizontalAlignment="Right"
+                       Text="OSCARS"
+                       Style="{StaticResource TextBlockBold}"
+                       Grid.Row="11" />
+            <ItemsControl x:Name="icOscars"
+                       ItemsSource="{Binding OscarsArray}"
+                       Grid.Row="11"
+                       Grid.Column="1" ItemTemplate="{StaticResource DataTemplateOscars}" ItemsPanel="{StaticResource ItemsPanelTemplateWrapPanel}" />
+            <Border Grid.Column="1" HorizontalAlignment="Left" Grid.Row="11" VerticalAlignment="Bottom" Background="White" Margin="5" BorderBrush="Gray" BorderThickness="1" CornerRadius="3" >
+            	<TextBlock Text="{Binding Oscars}" FontSize="32" Margin="0"/>
+            </Border>
+			<TextBlock HorizontalAlignment="Right"
+                       Text="RUNTIME"
+                       Style="{StaticResource TextBlockBold}"
+                       Grid.Row="12" />
+            <TextBlock x:Name="txtRuntime"
+                       Text="{Binding Runtime, StringFormat=\{0\} min}"
+                       Grid.Row="12"
+                       Grid.Column="1" />
+            <TextBlock HorizontalAlignment="Right"
+                       Text="CAST"
+                       Style="{StaticResource TextBlockBold}"
+                       Grid.Row="13" />
+            <ItemsControl x:Name="lbCast"
+                          ItemsSource="{Binding CastTop15}"
+                          Grid.Row="13"
+                          Grid.Column="1" />
+            <ListBox x:Name="lbMedia"
+                     telerik:RadDockPanel.Dock="Bottom"
+                     ItemTemplate="{StaticResource DataTemplateImage}"
+                     ItemsSource="{Binding MediaImages}"
+                     ItemsPanel="{StaticResource ItemsPanelTemplateWrapPanel}"
+                     Grid.Row="14"
+                     Grid.ColumnSpan="2" />
+        </Grid>        
+    </Grid>
+</navigation:Page>
